@@ -1,0 +1,33 @@
+import { makeUserCreateService } from "../services/factories/makeUserCreateService.js";
+import { makeUserShowService } from "../services/factories/makeUserShowService.js";
+import { makeUserUpdateService } from "../services/factories/makeUserUpdateService.js";
+
+export class UsersController {
+  async create(req, res) {
+    const { name, email, password } = req.body;
+    const userCreateService = makeUserCreateService();
+    await userCreateService.execute({ name, email, password });
+    res.status(201).json({ message: "Usuário criado com sucesso!" });
+  }
+
+  async show(req, res) {
+    const userId = req.user.id;
+    const userShowService = makeUserShowService();
+    const user = await userShowService.execute(userId);
+    return res.status(200).json(user);
+  }
+
+  async update(req, res) {
+    const { name, email, newPassword, oldPassword } = req.body;
+    const userId = req.user.id;
+    const userUpdateService = makeUserUpdateService();
+    await userUpdateService.execute({
+      name,
+      email,
+      newPassword,
+      oldPassword,
+      userId,
+    });
+    return res.status(200).json({ message: "Usuário atualizado com sucesso!" });
+  }
+}
