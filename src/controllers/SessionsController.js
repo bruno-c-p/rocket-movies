@@ -1,4 +1,4 @@
-import { makeSessionCreateService } from "../services/factories/makeSessionCreateService.js";
+import { makeSessionCreateService } from "../use-cases/sessions/factories/makeSessionCreateService.js";
 
 export class SessionsController {
   async create(req, res) {

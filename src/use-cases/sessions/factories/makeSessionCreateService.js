@@ -1,4 +1,4 @@
-import { UserRepository } from "../../repositories/UserRepository.js";
+import { UserRepository } from "../../../repositories/UserRepository.js";
 import { SessionCreateService } from "../SessionCreateService.js";
 
 export function makeSessionCreateService() {

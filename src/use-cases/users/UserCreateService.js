@@ -1,4 +1,4 @@
-import { ConflictError } from "../utils/AppError.js";
+import { ConflictError } from "../../utils/AppError.js";
 
 export class UserCreateService {
   constructor(userRepository) {

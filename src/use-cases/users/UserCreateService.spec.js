@@ -1,6 +1,6 @@
 require("babel-polyfill");
 import UserCreateService from "./UserCreateService.js";
-import UserRepositoryInMemory from "./../repositories/UserRepositoryInMemory.js";
+import UserRepositoryInMemory from "../../repositories/UserRepositoryInMemory.js";
 
 it("user should be created", async () => {
   const user = {

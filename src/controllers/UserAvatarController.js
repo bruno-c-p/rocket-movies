@@ -1,4 +1,4 @@
-import { makeUserAvatarUpdateService } from "../services/factories/makeUserAvatarUpdateService.js";
+import { makeUserAvatarUpdateService } from "../use-cases/users/factories/makeUserAvatarUpdateService.js";
 
 export class UserAvatarController {
   async update(req, res) {

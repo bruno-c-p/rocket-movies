@@ -1,6 +1,6 @@
-import { makeUserCreateService } from "../services/factories/makeUserCreateService.js";
-import { makeUserShowService } from "../services/factories/makeUserShowService.js";
-import { makeUserUpdateService } from "../services/factories/makeUserUpdateService.js";
+import { makeUserCreateService } from "../use-cases/users/factories/makeUserCreateService.js";
+import { makeUserShowService } from "../use-cases/users/factories/makeUserShowService.js";
+import { makeUserUpdateService } from "../use-cases/users/factories/makeUserUpdateService.js";
 
 export class UsersController {
   async create(req, res) {

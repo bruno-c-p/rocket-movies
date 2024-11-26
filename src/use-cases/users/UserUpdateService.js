@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
-import { BadRequestError, ConflictError } from "../utils/AppError.js";
+import { BadRequestError, ConflictError } from "../../utils/AppError.js";
 
 export class UserUpdateService {
   constructor(userRepository) {

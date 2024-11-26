@@ -1,5 +1,5 @@
-import { DiskStorage } from "../providers/DiskStorage.js";
-import { UnauthorizedError } from "../utils/AppError.js";
+import { DiskStorage } from "../../providers/DiskStorage.js";
+import { UnauthorizedError } from "../../utils/AppError.js";
 
 export class UserAvatarUpdateService {
   constructor(userRepository) {

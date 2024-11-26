@@ -1,8 +1,8 @@
 import bcrypt from "bcryptjs";
 import pkg from "jsonwebtoken";
 const { sign } = pkg;
-import { UnauthorizedError } from "../utils/AppError.js";
-import authConfig from "../configs/auth.js";
+import { UnauthorizedError } from "../../utils/AppError.js";
+import authConfig from "../../configs/auth.js";
 
 export class SessionCreateService {
   constructor(userRepository) {

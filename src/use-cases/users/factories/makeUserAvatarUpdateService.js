@@ -1,4 +1,4 @@
-import { UserRepository } from "../../repositories/UserRepository.js";
+import { UserRepository } from "../../../repositories/UserRepository.js";
 import { UserAvatarUpdateService } from "../UserAvatarUpdateService.js";
 
 export function makeUserAvatarUpdateService() {
