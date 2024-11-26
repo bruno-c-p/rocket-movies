@@ -26,6 +26,6 @@ export class UserRepository {
   }
 
   async update({ userId, user }) {
-    return knex("users").where({ id: userId }).update(user);
+    return knex("users").returning("*").where({ id: userId }).update(user);
   }
 }

@@ -2,10 +2,13 @@ import { makeUserAvatarUpdateService } from "../services/factories/makeUserAvata
 
 export class UserAvatarController {
   async update(req, res) {
-    const user_id = req.user.id;
+    const userId = req.user.id;
     const avatarFilename = req.file.filename;
     const userAvatarUpdateService = makeUserAvatarUpdateService();
-    const user = userAvatarUpdateService.execute({ user_id, avatarFilename });
+    const user = await userAvatarUpdateService.execute({
+      userId,
+      avatarFilename,
+    });
     return res.status(200).send(user);
   }
 }

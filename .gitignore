@@ -1,7 +1,9 @@
 node_modules
 .env
 /tmp/*
+/tmp/uploads/*
 !/tmp/.gitkeep
-/uploads/*
+!/tmp/uploads
+!/tmp/uploads/.gitkeep
 !/uploads/.gitkeep
 /src/database/database.db

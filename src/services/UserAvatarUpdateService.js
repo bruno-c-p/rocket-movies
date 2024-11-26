@@ -6,9 +6,9 @@ export class UserAvatarUpdateService {
     this.userRepository = userRepository;
   }
 
-  async execute({ user_id, avatarFilename }) {
+  async execute({ userId, avatarFilename }) {
     const diskStorage = new DiskStorage();
-    const user = this.userRepository.findById(user_id);
+    const user = await this.userRepository.findById(userId);
     if (!user) {
       throw new UnauthorizedError(
         "Somente usuários autenticados podem mudar o avatar!"
@@ -18,7 +18,8 @@ export class UserAvatarUpdateService {
       await diskStorage.deleteFile(user.avatar);
     }
     const filename = await diskStorage.saveFile(avatarFilename);
-    user.avatar = filename;
-    return this.userRepository.update({ user_id, user });
+    user.avatar_url = filename;
+    const updatedUser = await this.userRepository.update({ userId, user });
+    return updatedUser;
   }
 }
