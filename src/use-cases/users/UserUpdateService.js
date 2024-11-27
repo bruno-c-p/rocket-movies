@@ -7,11 +7,11 @@ export class UserUpdateService {
   }
 
   async execute({ name, email, newPassword, oldPassword, userId }) {
-    const user = await this.userRepository.findById(userId);
     const userWithUpdatedEmail = await this.userRepository.findByEmail(email);
-    if (userWithUpdatedEmail && userWithUpdatedEmail.id !== user.id) {
-      throw new ConflictError("Este email já esta sendo usado!");
+    if (userWithUpdatedEmail && userWithUpdatedEmail.id !== userId) {
+      throw new ConflictError("Este email já está sendo usado!");
     }
+    const user = await this.userRepository.findById(userId);
     user.name = name ?? user.name;
     user.email = email ?? user.email;
     if (newPassword && !oldPassword) {
