@@ -10,7 +10,7 @@ Features:
 - Add Movies: Users can input movie name, description, and rating.
 - Tagging System: Create and associate tags with movies to organize them.
 
-### ERD
+## ERD
 
 <img src="./.github/images/rocket-movies-erd.jpg" alt="RocketMovies ERD">
 
