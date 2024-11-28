@@ -6,7 +6,7 @@ export function LinkText({ title, className, icon: Icon, ...rest }) {
     <Link
       {...rest}
       className={cn(
-        "flex items-center justify-center gap-2 text-pink hover:brightness-90",
+        "flex items-center justify-center gap-2 text-mr text-pink hover:brightness-90",
         className,
       )}
     >

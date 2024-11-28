@@ -25,7 +25,7 @@ export function SignUp() {
     api
       .post("/users", { name, email, password })
       .then((response) => {
-        alert(response.message);
+        alert(response.data.message);
         navigate("/");
       })
       .catch((error) => {
