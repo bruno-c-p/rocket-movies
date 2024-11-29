@@ -12,6 +12,10 @@ app.use(express.json());
 app.use("/files", express.static(UPLOADS_FOLDER));
 app.use(routes);
 
+app.get("/", (_, res) => {
+  res.send({ status: "OK" });
+});
+
 app.use((error, _request, response, _next) => {
   if (error instanceof AppError) {
     return response.status(error.statusCode).json({
