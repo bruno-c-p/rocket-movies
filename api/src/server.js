@@ -1,14 +1,21 @@
-import "express-async-errors";
+import cookieParser from "cookie-parser";
+import cors from "cors";
 import "dotenv/config";
 import express from "express";
-import cors from "cors";
+import "express-async-errors";
+import { UPLOADS_FOLDER } from "./configs/upload.js";
 import { routes } from "./routes/index.js";
 import { AppError } from "./utils/AppError.js";
-import { UPLOADS_FOLDER } from "./configs/upload.js";
 
 const app = express();
-app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: [process.env.APP_URL],
+    credentials: true,
+  })
+);
 app.use("/files", express.static(UPLOADS_FOLDER));
 app.use(routes);
 
@@ -30,5 +37,5 @@ app.use((error, _request, response, _next) => {
   });
 });
 
-const PORT = process.env.PORT || 3333;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server is running on PORT: ${PORT}`));

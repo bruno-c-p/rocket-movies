@@ -4,11 +4,11 @@ import { UnauthorizedError } from "../utils/AppError.js";
 import authConfig from "../configs/auth.js";
 
 export function ensureAuthenticated(req, res, next) {
-  const authHeader = req.headers.authorization;
-  if (!authHeader) {
-    throw new UnauthorizedError("JWT não informado");
+  const authHeader = req.headers;
+  if (!authHeader.cookie) {
+    throw new UnauthorizedError("JWT token não informado");
   }
-  const [, token] = authHeader.split(" ");
+  const [, token] = authHeader.cookie.split("token=");
   try {
     const { sub: user_id } = verify(token, authConfig.jwt.secret);
     req.user = {

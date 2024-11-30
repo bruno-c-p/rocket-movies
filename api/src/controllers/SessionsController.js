@@ -1,4 +1,14 @@
 import { makeSessionCreateService } from "../use-cases/sessions/factories/makeSessionCreateService.js";
+import { __prod__, FIFTEEN_MINUTES } from "../constants.js";
+
+const cookieOptions = {
+  httpOnly: true,
+  secure: __prod__,
+  sameSite: "lax",
+  path: "/",
+  domain: __prod__ ? `.${process.env.DOMAIN}` : "",
+  maxAge: FIFTEEN_MINUTES,
+};
 
 export class SessionsController {
   async create(req, res) {
@@ -8,7 +18,7 @@ export class SessionsController {
       email,
       password,
     });
-    delete user.password;
-    return res.status(200).json({ user, token });
+    response.cookie("token", token, cookieOptions);
+    return res.status(200).json({ user });
   }
 }

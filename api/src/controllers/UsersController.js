@@ -1,6 +1,7 @@
 import { makeUserCreateService } from "../use-cases/users/factories/makeUserCreateService.js";
 import { makeUserShowService } from "../use-cases/users/factories/makeUserShowService.js";
 import { makeUserUpdateService } from "../use-cases/users/factories/makeUserUpdateService.js";
+import { makeUserValidatedService } from "../use-cases/users/factories/makeUserValidatedService.js";
 
 export class UsersController {
   async create(req, res) {
@@ -29,5 +30,12 @@ export class UsersController {
       userId,
     });
     return res.status(200).json({ message: "Usuário atualizado com sucesso!" });
+  }
+
+  async index(request, response) {
+    const { userId } = request.user;
+    const userValidatedService = makeUserValidatedService();
+    await userValidatedService.execute({ userId });
+    return response.status(200).json();
   }
 }
