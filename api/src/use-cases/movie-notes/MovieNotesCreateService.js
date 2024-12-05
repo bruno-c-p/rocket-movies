@@ -28,7 +28,6 @@ export class MovieNotesCreateService {
         name,
       };
     });
-    console.log(tagsInsert);
     await this.movieTagsRepository.create(tagsInsert);
   }
 }

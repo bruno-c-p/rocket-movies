@@ -1,102 +1,35 @@
-import { useState, useEffect } from "react";
+import { Plus } from "@phosphor-icons/react";
 import { useNavigate } from "react-router-dom";
-import { FiPlus } from "react-icons/fi";
-import { Link } from "react-router-dom";
-import { Header } from "../../components/Header";
-// import { ButtonText } from "../../components/ButtonText";
-import { Input } from "../../components/Input";
-import { Section } from "../../components/Section";
-import { Note } from "../../components/Note";
-import { api } from "../../services/api";
+import { Button } from "../../components/Button";
+import { MovieNoteItem } from "../../components/MovieNoteItem/MovieNoteItem";
+import { MovieNotesContext, useMovieNotes } from "../../hooks/movie-notes";
 
 export function Home() {
-  const [search, setSearch] = useState("");
-  const [tags, setTags] = useState([]);
-  const [notes, setNotes] = useState([]);
-  const [selectedTags, setSelectedTags] = useState([]);
+  const { movieNotes } = useMovieNotes(MovieNotesContext);
   const navigate = useNavigate();
 
-  function handleSelectedTag(tagName) {
-    if (tagName === "all") {
-      return selectedTags([]);
-    }
-    if (selectedTags.includes(tagName)) {
-      setSelectedTags(selectedTags.filter((tag) => tag !== tagName));
-    } else {
-      setSelectedTags([...selectedTags, tagName]);
-    }
-  }
-
-  function handleDetails(id) {
-    navigate(`/details/${id}`);
-  }
-
-  useEffect(() => {
-    async function fetchTags() {
-      const response = await api.get("/tags");
-      setTags(response.data);
-    }
-    fetchTags();
-  }, []);
-
-  useEffect(() => {
-    async function fetchNotes() {
-      const response = await api.get(
-        `/notes?search=${search}&tags=${selectedTags.join(",")}`,
-      );
-      setNotes(response.data);
-    }
-    fetchNotes();
-  }, [selectedTags, search]);
-
   return (
-    <>
-      <Header />
-      <ul className="grid-in-menu flex flex-col bg-background900 pt-16 text-center gap-6">
-        <li>
-          {/* <ButtonText
-            title="Todos"
-            isActive={selectedTags === 0}
-            onClick={() => handleSelectedTag("all")}
-          /> */}
-        </li>
-        {tags &&
-          tags.map((tag) => (
-            <li key={String(tag.id)}>
-              {/* <ButtonText
-                title={tag.name}
-                onClick={() => handleSelectedTag(tag.name)}
-                isActive={selectedTags.includes(tag.name)}
-              ></ButtonText> */}
-            </li>
-          ))}
-      </ul>
-      <div className="grid-in-search pt-16 px-16 pb-0">
-        <Input
-          placeholder="Pesquisar pelo título"
-          onChange={(e) => setSearch(e.target.value)}
-        />
-      </div>
-      <div className="grid-in-content py-0 px-16 overflow-y-auto">
-        <Section title="Minhas Notas">
-          {notes &&
-            notes.map((note) => (
-              <Note
-                key={String(note.id)}
-                data={note}
-                onClick={() => handleDetails(note.id)}
+    <div className="mt-20 sm:mt-16 py-6 px-4 sm:px-6 md:px-12 lg:px-16">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex items-center justify-between gap-2">
+          <h1 className="text-section-title text-white">Meus Filmes</h1>
+          <Button
+            className="max-w-fit flex font-normal"
+            title="Novo Filme"
+            icon={Plus}
+            onClick={() => navigate("/new")}
+          />
+        </div>
+        <ul className="mt-10 sm:max-h-[60vh] sm:overflow-y-auto flex flex-col gap-6">
+          {movieNotes &&
+            movieNotes.map((movieNote) => (
+              <MovieNoteItem
+                key={movieNote.movie_notes_id}
+                movieNote={movieNote}
               />
             ))}
-        </Section>
+        </ul>
       </div>
-      <div className="grid-in-newnote"></div>
-      <Link
-        to="/new"
-        className="grid-in-newnote text-background900 bg-orange border-none flex items-center gap-2 justify-center"
-      >
-        <FiPlus />
-        Criar nota
-      </Link>
-    </>
+    </div>
   );
 }

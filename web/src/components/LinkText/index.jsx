@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { cn } from "../../lib/utils";
 
-export function LinkText({ title, className, icon: Icon, ...rest }) {
+export function LinkText({ className, children, ...rest }) {
   return (
     <Link
       {...rest}
@@ -10,8 +10,7 @@ export function LinkText({ title, className, icon: Icon, ...rest }) {
         className,
       )}
     >
-      {Icon && <Icon size={16} weight="bold" />}
-      {title}
+      {children}
     </Link>
   );
 }

@@ -52,12 +52,14 @@ export function Profile() {
   }
 
   return (
-    <div>
+    <div className="">
       <header className="w-full h-56 sm:h-36 bg-pink bg-opacity-5 flex items-start pt-16 px-8 sm:px-28">
-        <LinkText onClick={handleBack} className="max-w-sm">
-          <ArrowLeft size={12} weight="bold" />
-          Voltar
-        </LinkText>
+        <div className="w-full flex max-w-7xl mx-auto">
+          <LinkText onClick={handleBack}>
+            <ArrowLeft size={12} weight="bold" />
+            Voltar
+          </LinkText>
+        </div>
       </header>
       <form className="max-w-sm -mt-[88px] mx-auto px-4">
         <div className="relative mt-0 mx-auto mb-8 w-44 h-44">

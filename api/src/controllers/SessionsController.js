@@ -18,7 +18,7 @@ export class SessionsController {
       email,
       password,
     });
-    response.cookie("token", token, cookieOptions);
+    res.cookie("token", token, cookieOptions);
     return res.status(200).json({ user });
   }
 }

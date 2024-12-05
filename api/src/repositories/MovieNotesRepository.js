@@ -26,12 +26,17 @@ export class MovieNotesRepository {
     if (!movieNote) {
       throw new NotFoundError("Filme não encontrado!");
     }
+    const user = await knex("users")
+      .select("users.name", "users.avatar_url")
+      .where({ id: userId })
+      .first();
     const tags = await knex("movie_tags").where({
       movie_notes_id: movieNote.id,
     });
     return {
       ...movieNote,
       tags: [...tags.map((tag) => tag.name)],
+      user: { ...user },
     };
   }
 

@@ -10,11 +10,9 @@ function AuthProvider({ children }) {
   async function signIn({ email, password }) {
     try {
       const response = await api.post("/sessions", { email, password });
-      const { user, token } = response.data;
-      localStorage.setItem("@rocketnotes:user", JSON.stringify(user));
-      localStorage.setItem("@rocketnotes:token", token);
-      api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      setData({ user, token });
+      const { user } = response.data;
+      localStorage.setItem("@rocketmovies:user", JSON.stringify(user));
+      setData({ user });
     } catch (error) {
       if (error.response) {
         alert(error.response.data.message);
@@ -25,9 +23,7 @@ function AuthProvider({ children }) {
   }
 
   function signOut() {
-    localStorage.removeItem("@rocketnotes:user");
-    localStorage.removeItem("@rocketnotes:token");
-    api.defaults.headers.common["Authorization"] = "";
+    localStorage.removeItem("@rocketmovies:user");
     setData({});
   }
 
@@ -40,8 +36,8 @@ function AuthProvider({ children }) {
         user.avatar = response.data.avatar;
       }
       await api.put("/users", user);
-      localStorage.setItem("@rocketnotes:user", JSON.stringify(user));
-      setData({ user, token: data.token });
+      localStorage.setItem("@rocketmovies:user", JSON.stringify(user));
+      setData({ user });
       alert("Perfil atualizado com sucesso!");
     } catch (error) {
       if (error.response) {
@@ -53,11 +49,9 @@ function AuthProvider({ children }) {
   }
 
   useEffect(() => {
-    const user = localStorage.getItem("@rocketnotes:user");
-    const token = localStorage.getItem("@rocketnotes:token");
-    if (user && token) {
-      api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      setData({ user: JSON.parse(user), token });
+    const user = localStorage.getItem("@rocketmovies:user");
+    if (user) {
+      setData({ user: JSON.parse(user) });
     }
   }, []);
 

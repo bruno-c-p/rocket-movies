@@ -1,4 +1,4 @@
-import { UnauthorizedError } from "../../utils/AppError";
+import { UnauthorizedError } from "../../utils/AppError.js";
 
 export class UserValidatedService {
   constructor(userRepository) {

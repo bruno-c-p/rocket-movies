@@ -33,7 +33,7 @@ export class UsersController {
   }
 
   async index(request, response) {
-    const { userId } = request.user;
+    const userId = request.user.id;
     const userValidatedService = makeUserValidatedService();
     await userValidatedService.execute({ userId });
     return response.status(200).json();
